@@ -20,11 +20,6 @@ public class Joueur {
         scanner = new Scanner(System.in);
     }
 
-    // public Joueur(String name, Pion pion) {
-    // this.name = name;
-    // this.pion = pion;
-    // }
-
     public void askName() {
         String oldName = name;
         System.out.println(String.format("Quel est le nom du %s ?", name));
@@ -46,12 +41,8 @@ public class Joueur {
 
             if (morpion.plateau[li][col] == ' ') {
                 morpion.plateau[li][col] = neutre;
-                pionsJoues++;
                 good = true;
-                // if (pionsJoues == pionsMax) {
-                // System.out.println("égalité");
-                // break;
-                // }
+
             } else {
                 System.out.println("La case est déjà utilisé");
                 good = false;
