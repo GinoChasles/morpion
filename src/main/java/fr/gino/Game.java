@@ -1,7 +1,5 @@
 package fr.gino;
 
-import java.util.Scanner;
-
 public class Game {
     Grille morpion;
     Joueur joueur1;
@@ -9,7 +7,6 @@ public class Game {
     Joueur currentlyPlayer;
     int pionsJoues = 0;
     int pionsMax = 9;
-    Scanner scanner;
 
     public Game(Grille morpion, Joueur joueur1, Joueur joueur2, Joueur currentlyPlayer) {
         this.morpion = morpion;
@@ -22,24 +19,27 @@ public class Game {
         if (currentlyPlayer == joueur1) {
             joueur1.jouerPion('X', morpion);
             pionsJoues++;
+            if (checkVictory()) {
+                System.out.println(String.format("Bravo %s, tu as gagné !", joueur1.name));
+            }
             currentlyPlayer = joueur2;
         } else if (currentlyPlayer == joueur2) {
             joueur2.jouerPion('O', morpion);
             pionsJoues++;
+            if (checkVictory()) {
+                System.out.println(String.format("Bravo %s, tu as gagné !", joueur2.name));
+            }
             currentlyPlayer = joueur1;
         }
     }
 
     public void game(Grille morpion, Joueur joueur1, Joueur joueur2) {
-        morpion.afficherGrille();
+
         while ((pionsJoues != pionsMax) && (checkVictory() == false)) {
-            turn();
             morpion.afficherGrille();
-            checkVictory();
-            if ((pionsJoues == pionsMax) && (checkVictory() == false)) {
-                System.out.println("Egalité !");
-            }
+            turn();
         }
+
     }
 
     public boolean checkline() {
@@ -54,10 +54,10 @@ public class Game {
 
     public boolean checkcolonne() {
         return (((morpion.plateau[0][0] == 'X') && (morpion.plateau[1][0] == 'X') && (morpion.plateau[2][0] == 'X'))
-                || ((morpion.plateau[1][0] == 'X') && (morpion.plateau[1][1] == 'X') && (morpion.plateau[2][1] == 'X'))
+                || ((morpion.plateau[0][1] == 'X') && (morpion.plateau[1][1] == 'X') && (morpion.plateau[2][1] == 'X'))
                 || ((morpion.plateau[0][2] == 'X') && (morpion.plateau[1][2] == 'X') && (morpion.plateau[2][2] == 'X'))
                 || ((morpion.plateau[0][0] == 'O') && (morpion.plateau[1][0] == 'O') && (morpion.plateau[2][1] == 'O'))
-                || ((morpion.plateau[1][0] == 'O') && (morpion.plateau[1][1] == 'O') && (morpion.plateau[1][2] == 'O'))
+                || ((morpion.plateau[0][1] == 'O') && (morpion.plateau[1][1] == 'O') && (morpion.plateau[2][1] == 'O'))
                 || ((morpion.plateau[0][2] == 'O') && (morpion.plateau[1][2] == 'O')
                         && (morpion.plateau[2][2] == 'O')));
 
