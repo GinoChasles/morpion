@@ -1,21 +1,24 @@
 package fr.gino;
 
-public class Game {
-    Grille morpion;
-    Joueur joueur1;
-    Joueur joueur2;
-    Joueur currentlyPlayer;
-    int pionsJoues = 0;
-    int pionsMax = 9;
+import java.util.Scanner;
 
-    public Game(Grille morpion, Joueur joueur1, Joueur joueur2, Joueur currentlyPlayer) {
+public class Game {
+    protected Grille morpion;
+    protected Joueur joueur1;
+    protected Joueur joueur2;
+    protected Joueur currentlyPlayer;
+    protected int pionsJoues = 0;
+    protected int pionsMax = 9;
+    Scanner scan;
+
+    protected Game(Grille morpion, Joueur joueur1, Joueur joueur2, Joueur currentlyPlayer) {
         this.morpion = morpion;
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
         this.currentlyPlayer = joueur1;
     }
 
-    public void turn() {
+    private void turn() {
         if (currentlyPlayer == joueur1) {
             joueur1.jouerPion('X', morpion);
             pionsJoues++;
@@ -33,16 +36,15 @@ public class Game {
         }
     }
 
-    public void game(Grille morpion, Joueur joueur1, Joueur joueur2) {
+    protected void game() {
 
         while ((pionsJoues != pionsMax) && (checkVictory() == false)) {
             morpion.afficherGrille();
             turn();
         }
-
     }
 
-    public boolean checkline() {
+    private boolean checkline() {
         return (((morpion.plateau[0][0] == 'X') && (morpion.plateau[0][1] == 'X') && (morpion.plateau[0][2] == 'X'))
                 || ((morpion.plateau[1][0] == 'X') && (morpion.plateau[1][1] == 'X') && (morpion.plateau[1][2] == 'X'))
                 || ((morpion.plateau[2][0] == 'X') && (morpion.plateau[2][1] == 'X') && (morpion.plateau[2][2] == 'X'))
@@ -52,7 +54,7 @@ public class Game {
                         && (morpion.plateau[2][2] == 'O')));
     }
 
-    public boolean checkcolonne() {
+    private boolean checkcolonne() {
         return (((morpion.plateau[0][0] == 'X') && (morpion.plateau[1][0] == 'X') && (morpion.plateau[2][0] == 'X'))
                 || ((morpion.plateau[0][1] == 'X') && (morpion.plateau[1][1] == 'X') && (morpion.plateau[2][1] == 'X'))
                 || ((morpion.plateau[0][2] == 'X') && (morpion.plateau[1][2] == 'X') && (morpion.plateau[2][2] == 'X'))
@@ -63,7 +65,7 @@ public class Game {
 
     }
 
-    public boolean checkDiagonal() {
+    private boolean checkDiagonal() {
         return (((morpion.plateau[0][0] == 'X') && (morpion.plateau[1][1] == 'X') && (morpion.plateau[2][2] == 'X'))
                 || ((morpion.plateau[0][0] == 'O') && (morpion.plateau[1][1] == 'O') && (morpion.plateau[2][2] == 'O'))
                 || ((morpion.plateau[2][0] == 'X') && (morpion.plateau[1][1] == 'X') && (morpion.plateau[0][2] == 'X'))
@@ -72,7 +74,7 @@ public class Game {
 
     }
 
-    public boolean checkVictory() {
+    private boolean checkVictory() {
         if (checkDiagonal() || checkcolonne() || checkline()) {
             System.out.println("Victory !");
             return true;

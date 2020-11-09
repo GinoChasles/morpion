@@ -2,9 +2,9 @@ package fr.gino;
 
 public class Pion {
 
-  char neutre;
+  protected char neutre;
 
-  Pion(char neutre) {
+  protected Pion(char neutre) {
     this.neutre = neutre;
   }
 }

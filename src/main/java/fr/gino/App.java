@@ -19,6 +19,6 @@ public final class App {
 
         Game partie = new Game(morpion, joueur1, joueur2, joueur1);
 
-        partie.game(morpion, joueur1, joueur2);
+        partie.game();
     }
 }

@@ -4,23 +4,23 @@ import java.util.Scanner;
 
 public class Joueur {
 
-    String name;
-    Pion neutre;
-    Grille morpion;
-    Scanner scanner;
-    int pionsJoues = 0;
-    int pionsMax = 9;
+    protected String name;
+    protected Pion neutre;
+    protected Grille morpion;
+    protected Scanner scanner;
+    protected int pionsJoues = 0;
+    protected int pionsMax = 9;
 
     // char grille[][];
     // char grille[][] = new char[3][3];
 
-    public Joueur(Pion neutre, String name) {
+    protected Joueur(Pion neutre, String name) {
         this.neutre = neutre;
         this.name = name;
         scanner = new Scanner(System.in);
     }
 
-    public void askName() {
+    protected void askName() {
         String oldName = name;
         System.out.println(String.format("Quel est le nom du %s ?", name));
 
@@ -28,7 +28,7 @@ public class Joueur {
         System.out.println(String.format("Le nom du %s est %s et joue les pions X", oldName, name));
     }
 
-    public void jouerPion(char neutre, Grille morpion) {
+    protected void jouerPion(char neutre, Grille morpion) {
         boolean good;
         do {
             System.out.println(
